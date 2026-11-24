@@ -226,17 +226,21 @@ public final class CpuSchedulingSimulator {
         Process[] results = Arrays.copyOf(schedule.processes, schedule.processes.length);
         Arrays.sort(results, Comparator.comparingInt(process -> process.id));
         System.out.println("\nProcess\tArrival\tBurst\tPriority\tCompletion\tTurnaround\tWaiting");
+        long totalCompletion = 0;
         long totalTurnaround = 0;
         long totalWaiting = 0;
         for (Process process : results) {
             long turnaroundTime = process.completionTime - process.arrivalTime;
             long waitingTime = turnaroundTime - process.burstTime;
+            totalCompletion += process.completionTime;
             totalTurnaround += turnaroundTime;
             totalWaiting += waitingTime;
             System.out.printf("%s\t%d\t%d\t%d\t\t%d\t\t%d\t\t%d%n",
                     process.label(), process.arrivalTime, process.burstTime, process.priority,
                     process.completionTime, turnaroundTime, waitingTime);
         }
+        System.out.printf("Average completion time: %.2f%n",
+                (double) totalCompletion / results.length);
         System.out.printf("Average turnaround time: %.2f%n",
                 (double) totalTurnaround / results.length);
         System.out.printf("Average waiting time: %.2f%n",
