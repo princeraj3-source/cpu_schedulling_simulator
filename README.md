@@ -2,7 +2,7 @@
 
 A Java command-line simulator for non-preemptive priority scheduling and
 round-robin scheduling. It prints a Gantt chart, each process's completion,
-turnaround, and waiting times, and the average turnaround and waiting times.
+turnaround, and waiting times, plus the averages of all three metrics.
 
 ## Requirements
 
